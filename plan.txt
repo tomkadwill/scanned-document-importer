@@ -1,0 +1,10 @@
+## Plan
+
+The aim of this project is to upload scanned images (from OneDrive), convert them into the appropriate format and then
+move them into the correct folder.
+
+For example, if I import a tax return, then the importer should convert it into a PDF, give it the correct name and then
+move it into the tax directory.
+
+Initially the project will ask questions to the user in order to move things into the correct place. Eventually, I want
+to expand this program to use A.I to determine which actions to take.
