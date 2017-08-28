@@ -1,11 +1,9 @@
-from os import listdir
-from os.path import isfile, join
 import os
 
 def main():
     print '1/3. Scanning OneDrive for new scanned files'
     one_drive_path = '/Users/thomaskadwill/OneDrive'
-    files_to_import = [f for f in listdir(one_drive_path) if isfile(join(one_drive_path, f))]
+    files_to_import = [f for f in os.listdir(one_drive_path) if os.path.isfile(os.path.join(one_drive_path, f))]
 
     gdrive_path = '/Users/thomaskadwill/Google Drive'
     gdrive_directories = os.listdir(gdrive_path)
