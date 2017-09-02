@@ -1,9 +1,6 @@
 import os
 
 class DocumentImporter(object):
-    ONE_DRIVE_PATH = '/Users/thomaskadwill/OneDrive'
-    GDRIVE_PATH = '/Users/thomaskadwill/Google Drive'
-
     def run(self):
         print '1/3. Importing the following files from OneDrive: %s' % self.scanned_image_files_to_import()
 
@@ -12,8 +9,8 @@ class DocumentImporter(object):
             print self.gdrive_directories(),
             folder_to_import_to = raw_input()
 
-            one_drive_path_to_file = self.ONE_DRIVE_PATH + '/' + file_to_import
-            destination_file_path = self.GDRIVE_PATH + '/' + folder_to_import_to + '/' + file_to_import
+            one_drive_path_to_file = self.one_drive_path() + '/' + file_to_import
+            destination_file_path = self.google_drive_path() + '/' + folder_to_import_to + '/' + file_to_import
 
             print 'Moving %s to %s' % (one_drive_path_to_file, destination_file_path)
             os.rename(one_drive_path_to_file, destination_file_path)
@@ -21,10 +18,10 @@ class DocumentImporter(object):
         print '3/3. Import complete.'
 
     def files_to_import(self):
-        return [f for f in os.listdir(self.ONE_DRIVE_PATH) if os.path.isfile(os.path.join(self.ONE_DRIVE_PATH, f))]
+        return [f for f in os.listdir(self.one_drive_path()) if os.path.isfile(os.path.join(self.one_drive_path(), f))]
 
     def gdrive_directories(self):
-        return os.listdir(self.GDRIVE_PATH)
+        return os.listdir(os.path.join(os.path.expanduser("~"), self.google_drive_path()))
 
     def scanned_image_files_to_import(self):
         files = []
@@ -33,6 +30,12 @@ class DocumentImporter(object):
                 files.append(file_name)
 
         return files
+
+    def one_drive_path(self):
+        return os.path.join(os.path.expanduser("~"), 'OneDrive')
+
+    def google_drive_path(self):
+        return os.path.join(os.path.expanduser("~"), 'Google Drive')
 
 if __name__ == '__main__':
     DocumentImporter().run()
